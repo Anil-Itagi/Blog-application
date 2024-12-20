@@ -6,7 +6,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const apiUrl ='http://localhost:5000';
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,7 +27,7 @@ const LoginForm = () => {
 
     try {
      // Send data to the backend using Axios POST request
-      const response = await axios.post("http://localhost:5000/api/login", {
+      const response = await axios.post(`${apiUrl}/api/login`, {
         email,
         password,
       });
@@ -36,7 +36,7 @@ const LoginForm = () => {
       console.log(email,password);
       alert("Login successful!");
     } catch (err) {
-      console.error("Error during login:", err.message);
+      console.error("Error during login:", err);
       setError("Login failed. Please try again.");
     } finally {
       setLoading(false);  // Set loading state back to false
