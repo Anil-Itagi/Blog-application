@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+require('dotenv').config();
 const app = express();
 const PORT = 5000;
 
@@ -11,7 +11,7 @@ app.use(express.json()); // Use express.json() instead of bodyParser.json()
 
 // MongoDB Connection
 mongoose
-    .connect("mongodb://localhost:27017/form", {
+    .connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -42,7 +42,7 @@ app.post("/api/login", async(req, res) => {
 
         res.status(201).json({ message: "User logged in successfully", data: newUser });
     } catch (error) {
-        console.log(error);
+        console.log(error + " eoorrrrr");
         res.status(500).json({ error: "Failed to log in user" });
     }
 });
