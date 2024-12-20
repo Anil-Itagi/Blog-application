@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "builds": [{
+        "src": "server.js",
+        "use": "@vercel/node"
+    }],
+    "env": {
+        "URL": "mongodb+srv://Zth8Mjfdf3NlVHZf:Zth8Mjfdf3NlVHZf@cluster0.aaqjloc.mongodb.net/form1"
+
+    }
+}
