@@ -11,7 +11,7 @@ app.use(express.json()); // Use express.json() instead of bodyParser.json()
 
 // MongoDB Connection
 mongoose
-    .connect(process.env.MONGO_URL, {
+    .connect(process.env.URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
