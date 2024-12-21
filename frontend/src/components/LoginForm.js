@@ -39,10 +39,12 @@ const LoginForm = () => {
      
       console.log("Server Response:", response.data);
       console.log(email, password);
+      alert("near to cookie check")
       const token = Math.floor(Math.random() * 100000000);
        Cookies.set('token',token , {
                     expires: 0.02, // 1 hour
-      });
+       });
+      
       alert("Login successful!");
       navigate("/");
     } catch (err) {
