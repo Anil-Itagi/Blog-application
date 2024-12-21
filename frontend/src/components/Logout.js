@@ -14,8 +14,10 @@ const Logout = () => {
             
         }
     };
-    const ok = alert("Are you sure you want to logout")
-    if(ok)
+    const userConfirmed = window.confirm(
+      "Are you sure you want to proceed?"
+    );
+    if(userConfirmed)
       handleLogout();
     return null;
 };
