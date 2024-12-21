@@ -6,7 +6,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const apiUrl ='http://localhost:5000';
+  const apiUrl =process.env.REACT_APP_API_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,7 +26,8 @@ const LoginForm = () => {
     setLoading(true);  // Set loading state to true
 
     try {
-     // Send data to the backend using Axios POST request
+      // Send data to the backend using Axios POST request
+      console.log("waiting for submit");
       const response = await axios.post(`${apiUrl}/api/login`, {
         email,
         password,
