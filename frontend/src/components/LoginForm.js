@@ -49,7 +49,7 @@ const LoginForm = () => {
       navigate("/");
     } catch (err) {
       console.error("Error during login:", err);
-     setError("Login failed. Please try again.");
+     setError("Login failed. Please try again."+err);
     } finally {
       setLoading(false);  // Set loading state back to false
     }
