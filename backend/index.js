@@ -12,8 +12,8 @@ app.use(express.json()); // Use express.json() instead of bodyParser.json()
 // MongoDB Connection
 mongoose
     .connect(process.env.URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+        // useNewUrlParser: true,
+        // useUnifiedTopology: true,
     })
     .then(() => console.log("MongoDB Connected"))
     .catch((err) => console.log(err));
