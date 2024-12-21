@@ -7,7 +7,7 @@ const LoginForm = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   //  const apiUrl =process.env.REACT_APP_API_URL;
-  const apiUrl='https://form-data-client-pwro6xuoq-anil-itagis-projects.vercel.app'
+  const apiUrl='https://form-data-server.vercel.app'
   const handleSubmit = async (e) => {
     e.preventDefault();
 
