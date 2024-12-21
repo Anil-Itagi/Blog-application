@@ -14,7 +14,9 @@ const Logout = () => {
             
         }
     };
-    handleLogout();
+    const ok = alert("Are you sure you want to logout")
+    if(ok)
+      handleLogout();
     return null;
 };
 export default Logout;
