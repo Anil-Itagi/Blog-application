@@ -43,14 +43,14 @@ app.post("/api/login", async(req, res) => {
         res.status(201).json({ message: "User logged in successfully", data: newUser });
     } catch (error) {
         console.log(error + " eoorrrrr");
-        res.status(500).json({ error: "Failed to log in user" });
+        res.status(500).json({ error });
     }
 });
 
 
 
 app.get('/', (req, res) => {
-    res.send('Hello, server! how are you', User);
+    res.send('Hello, server! how are you');
 });
 
 // Start the server
