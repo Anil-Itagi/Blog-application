@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios"; // Import Axios
-
+import {useNavigate} from 'react-router-dom'
 const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -8,9 +8,10 @@ const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-    // const apiUrl='http://localhost:5000'
-  const apiUrl = "https://form-data-server.vercel.app"; // Update this as per your backend URL
-
+  const apiUrl='http://localhost:5000'
+//   const apiUrl = "https://form-data-server.vercel.app"; // Update this as per your backend URL
+ 
+    const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,7 +44,8 @@ const SignupForm = () => {
       });
 
       console.log("Server Response:", response.data);
-      alert("Signup successful!");
+        alert("Signup successful!");
+        navigate('/');
     } catch (err) {
       console.error("Error during signup:", err);
       setError("Signup failed. Please try again.");

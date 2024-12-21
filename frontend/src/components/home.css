@@ -1,0 +1,91 @@
+/* Home.css */
+
+
+/* Styling for the summary container to make it scrollable */
+
+.summary-container {
+    max-height: 150px;
+    /* Limit the height of the summary */
+    overflow-y: auto;
+    /* Add vertical scroll if content overflows */
+    padding-right: 10px;
+    /* Add space for the scrollbar */
+}
+
+
+/* Base card styling */
+
+.post-card {
+    border: 1px solid #ddd;
+    /* Light border */
+    border-radius: 10px;
+    /* Rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transition for hover effects */
+}
+
+
+/* Card header */
+
+.post-card-header {
+    background-color: #f8f9fa;
+    /* Light background color */
+    padding: 15px;
+    /* Padding inside the header */
+    border-bottom: 1px solid #ddd;
+    /* Border at the bottom */
+}
+
+
+/* Hover effect on card */
+
+.post-card:hover {
+    transform: scale(1.05);
+    /* Slightly enlarge the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add shadow on hover */
+    background-color: #f1f1f1;
+    /* Change background color */
+}
+
+
+/* Hover effect on card header */
+
+.post-card-header:hover {
+    background-color: #e2e6ea;
+    /* Darken background color on hover */
+}
+
+
+/* Title color */
+
+.card-title {
+    color: #007bff;
+    /* Bootstrap primary color for titles */
+    font-weight: bold;
+}
+
+
+/* Link colors */
+
+.card-text a {
+    color: #007bff;
+    /* Link color */
+    text-decoration: none;
+    /* Remove underline */
+}
+
+.card-text a:hover {
+    text-decoration: underline;
+    /* Underline on hover */
+}
+
+
+/* Responsive styling for smaller screens */
+
+@media (max-width: 768px) {
+    .post-card {
+        margin-bottom: 15px;
+        /* Space between cards on mobile */
+    }
+}

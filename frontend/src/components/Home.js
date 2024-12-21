@@ -1,74 +1,86 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import './home.css'; // Import custom CSS for styling
 
+const apiUrl = 'http://localhost:5000';
 
 const Home = () => {
-  return (
-    <div className="container mt-5">
-      <header className="text-center mb-4">
-        <h1>Welcome to My Blog</h1>
-        <p className="text-muted">Explore and share amazing stories and ideas!</p>
-      </header>
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-      <div className="row">
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="card-img-top"
-              alt="Blog Post Thumbnail"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Post Title 1</h5>
-              <p className="card-text">
-                A short description of the blog post to catch the reader's attention.
-              </p>
-              <a href="#" className="btn btn-primary">
-                Read More
-              </a>
-            </div>
-          </div>
-        </div>
+    useEffect(() => {
+        // Fetch blog posts from the backend
+        const fetchBlogs = async () => {
+            try {
+                const response = await axios.get(`${apiUrl}/api/getblogs`);  // Your backend URL here
+                setPosts(response.data); // Assuming the response contains an array of blog posts
+            } catch (err) {
+                setError("Error fetching blogs");
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="card-img-top"
-              alt="Blog Post Thumbnail"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Post Title 2</h5>
-              <p className="card-text">
-                Another brief description highlighting the essence of the post.
-              </p>
-              <a href="#" className="btn btn-primary">
-                Read More
-              </a>
-            </div>
-          </div>
-        </div>
+        fetchBlogs();
+    }, []); // Empty dependency array, so it runs only once after the first render
 
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="card-img-top"
-              alt="Blog Post Thumbnail"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Post Title 3</h5>
-              <p className="card-text">
-                Discover insights, tips, and stories that inspire creativity.
-              </p>
-              <a href="#" className="btn btn-primary">
-                Read More
-              </a>
+    // Default image if the provided URL is invalid
+    const defaultImage = 'https://via.placeholder.com/150'; // Replace with your default image URL
+
+    // Function to check if the URL is valid
+    const isValidImage = (url) => {
+        const img = new Image();
+        img.onload = () => true;
+        img.onerror = () => false;
+        img.src = url;
+        return img.complete;
+    };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    return (
+        <div className="container mt-4">
+            <h2>All Posts</h2>
+            <div className="row">
+                {posts.map((post) => (
+                    <div key={post._id} className="col-md-4 mb-4">
+                        <div className="card post-card">
+                            <div className="card-header post-card-header">
+                                <h5 className="card-title">{post.title}</h5>
+                                <p className="text-muted">by {post.userName} - {post.category}</p>
+                            </div>
+                            <div className="card-body">
+                                <p className="card-text">{post.metaDescription}</p>
+                                <div className="summary-container">
+                                    <p><strong>Summary:</strong></p>
+                                    <p>{post.summary}</p>
+                                </div>
+                                <p><strong>Author:</strong> {post.author}</p>
+                                <p><strong>Tags:</strong> {post.tags}</p>
+                                <p><strong>Attachments:</strong></p>
+                                {/* Display the image or the default image */}
+                                <img
+                                    src={post.attachments }
+                                    alt="attachment"
+                                    className="img-fluid" // Make image responsive
+                                    style={{ maxHeight: '200px', objectFit: 'cover' }}
+                                />
+                                <p><small>{new Date(post.currentDate).toLocaleString()}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  );
-};
+    );
+}
 
 export default Home;

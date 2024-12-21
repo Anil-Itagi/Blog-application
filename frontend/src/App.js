@@ -7,21 +7,15 @@ import { BrowserRouter as Router, Routes, Route ,Outlet} from "react-router-dom"
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Logout from './components/Logout';
-import MyBlogs from './components/MyBlogs';
 import {  useState } from 'react';
+import CreateBlog from './components/CreateBlog';
+import User from './components/User';
 // import Cookies from 'js-cookie'
 
 
-const Layout = () => (
-  <>
-    <Header />
-    <Outlet /> 
-  </>
-);
+
 function App() {
 
-
-  
     
    const [isAuthenticated, setIsAuthenticated] = useState(false);
     
@@ -37,10 +31,15 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/blogs" element={
-            isAuthenticated? <MyBlogs />:
-                              <></>          
-          } />
+          <Route  path="/blogs" element={
+            isAuthenticated ? <>
+                                <User />
+                                <Outlet />
+                              </> :
+                            <></>          
+            }/>
+             
+          <Route  path="/createBlog" element={<CreateBlog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
        <Footer />

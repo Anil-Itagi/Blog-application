@@ -9,8 +9,8 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   //  const apiUrl =process.env.REACT_APP_API_URL;
-  // const apiUrl='http://localhost:5000'
-  const apiUrl='https://form-data-server.vercel.app'
+  const apiUrl='http://localhost:5000'
+  // const apiUrl='https://form-data-server.vercel.app'
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,12 +36,13 @@ const LoginForm = () => {
         email,
         password,
       });
-     
-      console.log("Server Response:", response.data);
-      console.log(email, password);
-      alert("near to cookie check")
+   
+      console.log("Server Response:", response.data.data);
+      // const { email, username, _id } = response.data.data;
+    
       const token = Math.floor(Math.random() * 100000000);
-       Cookies.set('token',token , {
+      
+      Cookies.set('token', token, {
                     expires: 0.02, // 1 hour
        });
       
@@ -49,7 +50,7 @@ const LoginForm = () => {
       navigate("/");
     } catch (err) {
       console.error("Error during login:", err);
-     setError("Login failed. Please try again. sorry"+err);
+     setError("Email or password are wrong");
     } finally {
       setLoading(false);  // Set loading state back to false
     }
