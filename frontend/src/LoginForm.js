@@ -34,12 +34,12 @@ const LoginForm = () => {
         password,
       });
 
-          console.log("Server Response:", response.data);
+      console.log("Server Response:", response.data);
       console.log(email,password);
       alert("Login successful!");
     } catch (err) {
       console.error("Error during login:", err);
-      setError("Login failed. Please try again.");
+      setError("Login failed. Please try again."+err);
     } finally {
       setLoading(false);  // Set loading state back to false
     }
