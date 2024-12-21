@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";  // Import Axios
-
+import { useNavigate} from 'react-router-dom'
+import Cookies from "js-cookie"
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   //  const apiUrl =process.env.REACT_APP_API_URL;
-  const apiUrl='http://localhost:5000'
-  //const apiUrl='https://form-data-server.vercel.app'
+  // const apiUrl='http://localhost:5000'
+  const apiUrl='https://form-data-server.vercel.app'
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,8 +38,13 @@ const LoginForm = () => {
       });
      
       console.log("Server Response:", response.data);
-      console.log(email,password);
+      console.log(email, password);
+      const token = Math.floor(Math.random() * 100000000);
+       Cookies.set('token',token , {
+                    expires: 0.02, // 1 hour
+      });
       alert("Login successful!");
+      navigate("/");
     } catch (err) {
       console.error("Error during login:", err);
      setError("Login failed. Please try again.");
