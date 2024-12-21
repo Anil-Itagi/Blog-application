@@ -50,7 +50,7 @@ app.post("/api/login", async(req, res) => {
 
 
 app.get('/', (req, res) => {
-    res.send('Hello, server!');
+    res.send('Hello, server!', User);
 });
 
 // Start the server
