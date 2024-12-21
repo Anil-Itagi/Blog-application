@@ -7,7 +7,7 @@ const Logout = () => {
     const handleLogout = async() => {
         try {
                 Cookies.remove('token');
-                navigate("/api/login"); //       
+                navigate("/login"); //       
             }
         catch (error) {
             console.error("Error during logout:", error.message);
@@ -18,7 +18,9 @@ const Logout = () => {
       "Are you sure you want to proceed?"
     );
     if(userConfirmed)
-      handleLogout();
+        handleLogout();
+    else
+        navigate('/')
     return null;
 };
 export default Logout;
