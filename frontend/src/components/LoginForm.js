@@ -7,7 +7,8 @@ const LoginForm = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   //  const apiUrl =process.env.REACT_APP_API_URL;
-  const apiUrl='https://form-data-server.vercel.app'
+  const apiUrl='http://localhost:5000'
+  //const apiUrl='https://form-data-server.vercel.app'
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,18 +29,18 @@ const LoginForm = () => {
 
     try {
       // Send data to the backend using Axios POST request
-      console.log("waiting for submit");
+    //  console.log("waiting for submit");
       const response = await axios.post(`${apiUrl}/api/login`, {
         email,
         password,
       });
-
+     
       console.log("Server Response:", response.data);
       console.log(email,password);
       alert("Login successful!");
     } catch (err) {
       console.error("Error during login:", err);
-      setError("Login failed. Please try again."+err);
+     setError("Login failed. Please try again.");
     } finally {
       setLoading(false);  // Set loading state back to false
     }
