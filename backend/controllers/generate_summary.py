@@ -1,7 +1,7 @@
 import google.generativeai as genai
-YOUR_API_KEY = "AIzaSyDygkwAbdkH0QXcH4kyC2xtE3CKwjFvhCM"
+
 import sys
-def generate_summary(blog_title, category, meta_description):
+def generate_summary(blog_title, category, meta_description,api):
     """
     Generates a concise summary using the Gemini API.
 
@@ -19,7 +19,7 @@ def generate_summary(blog_title, category, meta_description):
              f"Meta Description: {meta_description}\n"
 
     # Set the API key
-    genai.configure(api_key=YOUR_API_KEY) 
+    genai.configure(api_key=api) 
 
     # Specify the Gemini model
     model = genai.GenerativeModel("gemini-1.5-flash")
@@ -34,8 +34,8 @@ if __name__ == "__main__":
     blog_title = sys.argv[1]
     category = sys.argv[2]
     meta_description = sys.argv[3]
-    
+    api=sys.argv[4]
     # Generate summary and print it
-    summary = generate_summary(blog_title, category, meta_description)
+    summary = generate_summary(blog_title, category, meta_description,api)
     print(summary)
 

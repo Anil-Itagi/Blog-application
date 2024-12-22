@@ -3,7 +3,7 @@ const Blog = require("../models/blog");
 // Create Blog
 exports.createBlog = async(req, res) => {
     const { userId, userName, title, category, metaDescription, author, tags, summary, attachments } = req.body;
-    console.log("inside createblog");
+
     try {
         const newBlog = new Blog({
             userId,
@@ -17,9 +17,8 @@ exports.createBlog = async(req, res) => {
             summary,
         });
 
-        // Save the new blog to the database
         await newBlog.save();
-        console.log("end blog");
+
         res.status(201).json({ message: "Blog created successfully", blog: newBlog });
     } catch (error) {
         console.log("end blog" + error);

@@ -1,9 +1,9 @@
 const { spawn } = require('child_process');
 
 // Function to execute Python script and return output
-const executePythonScript = (title, category, metaDescription) => {
+const executePythonScript = (title, category, metaDescription, api) => {
     return new Promise((resolve) => {
-        const args = [title, category, metaDescription]; // Arguments for the Python script
+        const args = [title, category, metaDescription, api]; // Arguments for the Python script
 
         const pythonProcess = spawn('python', ['./controllers/generate_summary.py'].concat(args));
 
@@ -27,7 +27,8 @@ const executePythonScript = (title, category, metaDescription) => {
 // Main function to handle logic and get the summary
 async function getSummary1(title, category, metaDescription) {
     try {
-        const summary = await executePythonScript(title, category, metaDescription);
+        const api = process.env.GEMINI_API;
+        const summary = await executePythonScript(title, category, metaDescription, api);
         console.log("Generated Summary:", summary);
         return summary;
     } catch (error) {
