@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import Cookies from 'js-cookie';
+import axios from 'axios';
+const apiUrl='http://localhost:5000'
+const MyBlogs = () => {
+    const [blogs, setBlogs] = useState({});
+    const location = useLocation();
+   
 
-const MyBlogs = ({blogs}) => {
+     useEffect(() => {
+        const fetchUserDetails = async () => {
+            try {
+            const userId = Cookies.get('user'); 
+            const response = await axios.get(`${apiUrl}/api/getblogs/${userId}`); 
+            setBlogs(await response.data.blogs); // Set the response data
+            }
+            catch (err) {
+                console.error("Error fetching user details:", err);
+                alert("Error in fetching"+err)
+            }
+         };
+         fetchUserDetails();
+     }, [location]);
   return (
       <div>
           <h3 className="mb-4">My Blogs</h3>
-
-               
-             
+ 
             {blogs?.length > 0 ? (    
             <div className="row">
                 {blogs.map((post) => (

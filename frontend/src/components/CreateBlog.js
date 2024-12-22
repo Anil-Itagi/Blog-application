@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {useNavigate,useLocation} from 'react-router-dom'
 import axios from "axios";
+import Cookies from 'js-cookie'
 const apiUrl='http://localhost:5000'
   // const apiUrl='https://form-data-server.vercel.app'
-const CreateBlog = () => {
-    //const [gsummary, setGsummary] = useState("");
-    const [formData, setFormData] = useState({
-    userId: "asdfasdfasdfa",
-    userName:"ANil",
+const CreateBlog = ({setIsCreated,userName}) => {
+  const location = useLocation();
+  const [formData, setFormData] = useState({
+    userId: "",
+    userName,
     title: "",
     author: "",
     category: "",
@@ -15,7 +17,7 @@ const CreateBlog = () => {
     summary: "",
     attachments: "",
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -24,16 +26,26 @@ const CreateBlog = () => {
     });
   };
 
+  useEffect(() => {
+      const id = Cookies.get('user');
 
+      setFormData((formData) => ({
+      ...formData, // Spread the existing formData values
+        userId: id, // Update the userId field
+      }));
+  },[location])
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+   
+    
     try {
       // POST the blog data to create the blog
       const blogResponse = await axios.post(`${apiUrl}/api/createBlog`, formData);
-
+      
       console.log("Blog Data Submitted:", blogResponse.data);
-
+      setIsCreated(true);
+      alert("Blog created successfully");
+      navigate('/blogs');
       // Optionally handle response (e.g., show success message)
     } catch (error) {
       console.error("Error submitting blog:", error);

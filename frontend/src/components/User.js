@@ -10,10 +10,8 @@ const User = () => {
     // Mock user data
 
     const [isCreated, setIsCreated] = useState(true);
-    const [userId, setUserId] = useState('');
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
-    const [blogs, setBlogs] = useState({});
 
      const location = useLocation();
    
@@ -22,12 +20,8 @@ const User = () => {
         const fetchUserDetails = async () => {
             try {
             const userId = Cookies.get('user');
-            setUserId(userId);
-            console.log(userId);
             const response = await axios.get(`${apiUrl}/api/getuser/${userId}`); // Send userId as a route parameter
             setUserData(response.data.user); // Set the response data
-            setBlogs(response.data.blogs);
-            console.log(response.data.user);
             setError(null); // Clear any previous errors
         } catch (err) {
             console.error("Error fetching user details:", err);
@@ -47,6 +41,7 @@ const User = () => {
     return (
         <div className="container mt-5">
             {/* User Info */}
+            { error}
             <div className="text-center mb-4">
                 <img
                     src={"https://tse4.mm.bing.net/th?id=OIP.jixXH_Els1MXBRmKFdMQPAHaHa&pid=Api&P=0&h=180"}
@@ -58,7 +53,7 @@ const User = () => {
               
                 <Link className="btn btn-primary mt-3" onClick={handleClick} >{isCreated ? "Create New Blog  -->":"Go to My blogs -->" }</Link>
             </div>
-          {isCreated ?    <MyBlogs blogs={blogs }/> : <CreateBlog/>}
+            {isCreated ? <MyBlogs  /> : <CreateBlog setIsCreated={ setIsCreated} userName={userData?.username}/>}
             
             
         </div>
