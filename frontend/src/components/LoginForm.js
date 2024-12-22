@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";  // Import Axios
 import { useNavigate} from 'react-router-dom'
 import Cookies from "js-cookie"
+
 const LoginForm = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -41,7 +43,11 @@ const LoginForm = () => {
       // const { email, username, _id } = response.data.data;
     
       const token = Math.floor(Math.random() * 100000000);
-      
+      const userId = await response.data.data._id;
+      Cookies.set('user', userId, {
+                    expires: 0.02, // 1 hour
+       });
+
       Cookies.set('token', token, {
                     expires: 0.02, // 1 hour
        });
