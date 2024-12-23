@@ -53,7 +53,7 @@ const User = () => {
               
                 <Link className="btn btn-primary mt-3" onClick={handleClick} >{isCreated ? "Create New Blog  -->":"Go to My blogs -->" }</Link>
             </div>
-            {isCreated ? <MyBlogs  /> : <CreateBlog setIsCreated={ setIsCreated} userName={userData?.username}/>}
+            {isCreated ? <MyBlogs  /> : <CreateBlog setIsCreated={ setIsCreated} />}
             
             
         </div>
