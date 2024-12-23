@@ -37,6 +37,8 @@ async function getSummary1(title, category, metaDescription) {
     }
 }
 
+
+
 exports.getSummary = async(req, res) => {
     const { title, category, metaDescription } = req.body;
 
