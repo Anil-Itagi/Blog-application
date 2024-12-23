@@ -7,4 +7,5 @@ logs/
 *.log.*
 
 # Environment variables
+
 .env
