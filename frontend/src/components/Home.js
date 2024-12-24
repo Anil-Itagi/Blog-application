@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './home.css'; // Import custom CSS for styling
 
-const apiUrl = 'http://localhost:5000';
+const apiUrl = process.env.REACT_APP_API_KEY;
 
 const Home = () => {
     const [posts, setPosts] = useState([]);

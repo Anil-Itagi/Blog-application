@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import axios from "axios";  // Import Axios
 import MyBlogs from "./MyBlogs";
 import CreateBlog from "./CreateBlog";
-  const apiUrl='http://localhost:5000'
+const apiUrl = process.env.REACT_APP_API_KEY;
 const User = () => {
     // Mock user data
 

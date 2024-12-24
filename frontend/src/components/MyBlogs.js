@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Cookies from 'js-cookie';
 import axios from 'axios';
-const apiUrl='http://localhost:5000'
+const apiUrl = process.env.REACT_APP_API_KEY;
 const MyBlogs = () => {
     const [blogs, setBlogs] = useState({});
     const location = useLocation();

@@ -8,8 +8,7 @@ const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const apiUrl='http://localhost:5000'
-//   const apiUrl = "https://form-data-server.vercel.app"; // Update this as per your backend URL
+  const apiUrl = process.env.REACT_APP_API_KEY;
  
     const navigate = useNavigate();
   const handleSubmit = async (e) => {

@@ -2,13 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie'
+const apiUrl = process.env.REACT_APP_API_KEY;
 const DeletePost = ({ match }) => {
     const history = useHistory();
 
     const handleDelete = async () => {
         try {
              const userId = Cookies.get('user');
-            await axios.delete(`http://localhost:5000/api/posts/${userId}`);
+            await axios.delete(`${apiUrl}/api/posts/${userId}`);
             history.push('/'); // Redirect to home or another page
         } catch (err) {
             console.error("Error deleting post", err);

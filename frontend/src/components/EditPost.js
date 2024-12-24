@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
+const apiUrl = process.env.REACT_APP_API_KEY;
 const EditPost = ({ match }) => {
     const [post, setPost] = useState({ title: '', metaDescription: '', summary: '' });
     const [error, setError] = useState(null);
@@ -11,7 +12,7 @@ const EditPost = ({ match }) => {
         const fetchPost = async () => {
             try {
                  const userId = Cookies.get('user');
-                const response = await axios.get(`http://localhost:5000/posts/${userId}`);
+                const response = await axios.get(`${apiUrl}/posts/${userId}`);
                 setPost(response.data);
             } catch (err) {
                 setError("Error fetching post");
@@ -28,7 +29,7 @@ const EditPost = ({ match }) => {
         e.preventDefault();
         try {
             const userId = Cookies.get('user');
-            await axios.put(`http://localhost:5000/posts/${userId}`, post);
+            await axios.put(`${apiUrl}/posts/${userId}`, post);
             history.push('/'); // Redirect to home or another page
         } catch (err) {
             setError("Error updating post");

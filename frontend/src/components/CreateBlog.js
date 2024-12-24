@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import {useNavigate,useLocation} from 'react-router-dom'
 import axios from "axios";
 import Cookies from 'js-cookie'
-const apiUrl='http://localhost:5000'
-  // const apiUrl='https://form-data-server.vercel.app'
+const apiUrl = process.env.REACT_APP_API_KEY;
 const CreateBlog = ({setIsCreated,userName}) => {
   const location = useLocation();
   const [formData, setFormData] = useState({
