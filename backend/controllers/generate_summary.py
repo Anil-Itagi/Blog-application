@@ -34,7 +34,8 @@ if __name__ == "__main__":
     blog_title = sys.argv[1]
     category = sys.argv[2]
     meta_description = sys.argv[3]
-    api=sys.argv[4]
+    api=sys.argv[4] 
+   
     # Generate summary and print it
     summary = generate_summary(blog_title, category, meta_description,api)
     print(summary)

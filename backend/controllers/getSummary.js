@@ -2,6 +2,7 @@ const { spawn } = require('child_process');
 
 // Function to execute Python script and return output
 const executePythonScript = (title, category, metaDescription, api) => {
+
     return new Promise((resolve) => {
         const args = [title, category, metaDescription, api]; // Arguments for the Python script
 
@@ -11,6 +12,7 @@ const executePythonScript = (title, category, metaDescription, api) => {
 
         pythonProcess.stdout.on('data', (data) => {
             output = data.toString();
+
         });
 
 
@@ -26,10 +28,12 @@ const executePythonScript = (title, category, metaDescription, api) => {
 
 // Main function to handle logic and get the summary
 async function getSummary1(title, category, metaDescription) {
+
     try {
         const api = process.env.GEMINI_API;
+
         const summary = await executePythonScript(title, category, metaDescription, api);
-        console.log("Generated Summary:", summary);
+        console.log("Generated Summa:", summary);
         return summary;
     } catch (error) {
         console.error("Error generating summary:", error);

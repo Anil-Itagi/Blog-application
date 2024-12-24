@@ -3,7 +3,8 @@ import {useNavigate,useLocation} from 'react-router-dom'
 import axios from "axios";
 import Cookies from 'js-cookie'
 const apiUrl = process.env.REACT_APP_API_KEY;
-const CreateBlog = ({setIsCreated,userName}) => {
+const CreateBlog = ({ setIsCreated, userName }) => {
+
   const location = useLocation();
   const [formData, setFormData] = useState({
     userId: "",
@@ -32,13 +33,13 @@ const CreateBlog = ({setIsCreated,userName}) => {
       ...formData, // Spread the existing formData values
         userId: id, // Update the userId field
       }));
-  },[location])
+  }, [location])
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
-    
     try {
       // POST the blog data to create the blog
+     
       const blogResponse = await axios.post(`${apiUrl}/api/createBlog`, formData);
       
       console.log("Blog Data Submitted:", blogResponse.data);
@@ -53,11 +54,9 @@ const CreateBlog = ({setIsCreated,userName}) => {
 
   const generateSummary = async () => {
     try {
-      // POST the current data for summary generation
-        const summaryResponse = await axios.post(`${apiUrl}/api//generateSummary`,formData);
-
-        // Update the summary field with the generated summary
-     console.log(summaryResponse.data);
+     
+      const summaryResponse = await axios.post(`${apiUrl}/api//generateSummary`,formData);
+      console.log(summaryResponse.data);
       setFormData({ ...formData, summary: summaryResponse.data.summary });
     } catch (error) {
       console.error("Error generating summary:", error);
