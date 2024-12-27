@@ -4,10 +4,12 @@ const { spawn } = require('child_process');
 const executePythonScript = (title, category, metaDescription, api) => {
 
     return new Promise((resolve) => {
-        const args = [title, category, metaDescription, api]; // Arguments for the Python script
+        // const args = [title, category, metaDescription, api]; // Arguments for the Python script
+        const data = { title, category, metaDescription, api };
+        const pythonProcess = spawn('python', ['./controllers/generate_summary.py']);
 
-        const pythonProcess = spawn('python', ['./controllers/generate_summary.py'].concat(args));
-
+        pythonProcess.stdin.write(JSON.stringify(data));
+        pythonProcess.stdin.end();
         let output = '';
 
         pythonProcess.stdout.on('data', (data) => {

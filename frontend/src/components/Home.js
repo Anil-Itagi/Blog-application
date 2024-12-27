@@ -8,12 +8,14 @@ const Home = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+   
     useEffect(() => {
         // Fetch blog posts from the backend
         const fetchBlogs = async () => {
             try {
+                
                 const response = await axios.get(`${apiUrl}/api/getblogs`);  // Your backend URL here
+                 console.log("da");
                 setPosts(response.data); // Assuming the response contains an array of blog posts
             } catch (err) {
                 setError("Error fetching blogs");

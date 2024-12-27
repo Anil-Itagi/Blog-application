@@ -1,5 +1,5 @@
 import google.generativeai as genai
-
+import json
 import sys
 def generate_summary(blog_title, category, meta_description,api):
     """
@@ -30,13 +30,31 @@ def generate_summary(blog_title, category, meta_description,api):
     # Return the generated summary
     return response.text
 
+
+
 if __name__ == "__main__":
-    blog_title = sys.argv[1]
-    category = sys.argv[2]
-    meta_description = sys.argv[3]
-    api=sys.argv[4] 
+    # Read JSON input from stdin
+    try:
+        input_data = json.loads(sys.stdin.read())
+        blog_title = input_data["title"]
+        category = input_data["category"]
+        meta_description = input_data["metaDescription"]
+        api = input_data["api"]
+
+        # Generate summary and print it
+        summary = generate_summary(blog_title, category, meta_description, api)
+        print(summary)
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+        
+# if __name__ == "__main__":
+#     blog_title = sys.argv[1]
+#     category = sys.argv[2]
+#     meta_description = sys.argv[3]
+#     api=sys.argv[4] 
    
-    # Generate summary and print it
-    summary = generate_summary(blog_title, category, meta_description,api)
-    print(summary)
+#     # Generate summary and print it
+#     summary = generate_summary(blog_title, category, meta_description,api)
+#     print(summary)
 

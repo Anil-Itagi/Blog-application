@@ -3,6 +3,7 @@ const Blog = require('../models/blog'); // Import the Blog model
 
 // Controller to get all blogs
 exports.getAllblogs = async(req, res) => {
+
     try {
         // Fetch all blogs from the database
         const blogs = await Blog.find().sort({ createdAt: -1 });
